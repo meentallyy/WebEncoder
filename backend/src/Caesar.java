@@ -25,9 +25,9 @@ public class Caesar {
         int operation = scanner.nextInt();
         scanner.nextLine(); // очистка буфера
 
-        String inputFile = "C:\\1Encoder\\WebEncoder\\backend\\input.txt";
+        String inputFile = "input.txt";
 
-        String outputFile = "C:\\1Encoder\\WebEncoder\\backend\\output.txt";
+        String outputFile = "output.txt";
 
         System.out.print("Введите сдвиг: ");
         int shift = scanner.nextInt();
