@@ -33,8 +33,8 @@ jobs:
           shift=3
           echo "$original" > input.txt
           printf "$operation\n$shift\n" | java -cp src Caesar
-          expected = "Whvw Fdhvdu flskhu."
-          result = $(cat output.txt)
+          expected="Whvw Fdhvdu flskhu."
+          result=$(cat output.txt)
           echo "Original message: $expected"
           echo "Operation: $operation"
           echo "Shift:     $shift"
