@@ -45,3 +45,25 @@ jobs:
             exit 1
           fi
           echo "Test 1 passed!"
+
+      - name: Тест 2 - Дешифрование английского текста
+        run: |
+          original="Test Caesar cipher."
+          encrypted="Whvw Fdhvdu flskhu."
+          operation=2
+          shift=3
+          echo "$encrypted" > input.txt
+          printf "$operation\n$shift\n" | java -cp src Caesar
+          expected="$original"
+          result=$(cat output.txt)
+          echo "Original message:  $original"
+          echo "Encrypted message: $encrypted"
+          echo "Operation: $operation"
+          echo "Shift:     $shift"
+          echo "Expected message:  $expected"
+          echo "Result:            $result"
+          if [ "$expected" != "$result" ]; then
+            echo "Test 2 failed!"
+            exit 1
+          fi
+          echo "Test 2 passed!"
