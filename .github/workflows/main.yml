@@ -67,3 +67,53 @@ jobs:
             exit 1
           fi
           echo "Test 2 passed!"
+
+      - name: Тест 3 - Шифрование русского текста
+        run: |
+          original="Тест шифра Цезаря."
+          operation=1
+          shift=5
+
+          echo "$original" > input.txt
+          printf "$operation\n$shift\n" | java -cp src Caesar
+
+          expected="Хихф ъмчфе Ьимефд."
+          result=$(cat output.txt)
+
+          echo "Original message: $original"
+          echo "Operation: $operation"
+          echo "Shift:     $shift"
+          echo "Expected message: $expected"
+          echo "Result:           $result"
+
+          if [ "$expected" != "$result" ]; then
+            echo "Test 3 failed!"
+            exit 1
+          fi
+          echo "Test 3 passed!"
+
+      - name: Тест 4 - Дешифрование русского текста
+        run: |
+          original="Тест шифра Цезаря."
+          encrypted="Хихф ъмчфе Ьимефд."
+          operation=2
+          shift=5
+
+          echo "$encrypted" > input.txt
+          printf "$operation\n$shift\n" | java -cp src Caesar
+
+          expected="$original"
+          result=$(cat output.txt)
+
+          echo "Original message:  $original"
+          echo "Encrypted message: $encrypted"
+          echo "Operation: $operation"
+          echo "Shift:     $shift"
+          echo "Expected message:  $expected"
+          echo "Result:            $result"
+
+          if [ "$expected" != "$result" ]; then
+            echo "Test 4 failed!"
+            exit 1
+          fi
+          echo "Test 4 passed!"
