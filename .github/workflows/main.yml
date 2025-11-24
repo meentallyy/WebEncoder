@@ -1,0 +1,28 @@
+name: WebEncoder CI
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Получение кода из репозитория
+        uses: actions/checkout@v4
+
+      - name: Установка JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+
+      - name: Создание директории out
+        run: mkdir -p backend/out
+
+      - name: Компиляция
+        run: |
+          find backend/src -name "*.java"
+          javac -d backend/out $(find backend/src -name "*.java")
