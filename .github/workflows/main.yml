@@ -135,7 +135,28 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Компиляция RSA (KeyGenerator + RSA32768)
+      - name: Компиляция
         run: |
           javac src/KeyGenerator.java
           javac src/RSA32768.java
+
+  build-kuznechik:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend/kuznechik
+
+    steps:
+      - name: Получение кода
+        uses: actions/checkout@v4
+
+      - name: Установка JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Компиляция
+        run: |
+          javac src/Kuznechik.java
