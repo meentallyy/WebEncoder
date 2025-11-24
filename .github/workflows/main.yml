@@ -77,7 +77,7 @@ jobs:
           echo "$original" > input.txt
           printf "$operation\n$shift\n" | java -cp src Caesar
 
-          expected="Хихф ъмчфе Ьимефд."
+          expected="Чйцч энщхе Ыймехд."
           result=$(cat output.txt)
 
           echo "Original message: $original"
@@ -95,7 +95,7 @@ jobs:
       - name: Тест 4 - Дешифрование русского текста
         run: |
           original="Тест шифра Цезаря."
-          encrypted="Хихф ъмчфе Ьимефд."
+          encrypted="Чйцч энщхе Ыймехд."
           operation=2
           shift=5
 
