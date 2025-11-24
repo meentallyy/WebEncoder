@@ -1,0 +1,94 @@
+
+
+/* Рабочая область */
+.encoder-workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.input-section, .output-section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #eee;
+}
+
+.section-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.action-btn:hover:not(:disabled) {
+    background: #667eea;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.action-icon {
+    font-size: 1rem;
+}
+
+.text-area-container {
+    position: relative;
+}
+
+.text-area {
+    width: 100%;
+    padding: 1.5rem;
+    border: none;
+    resize: vertical;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    outline: none;
+}
+
+.input-area {
+    background: #fafafa;
+    min-height: 200px;
+}
+
+.output-area {
+    background: #f8f9ff;
+    min-height: 200px;
+}
+
+.text-counter {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    font-size: 0.8rem;
+    color: #666;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+

@@ -1,0 +1,582 @@
+.encoder-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 2rem;
+}
+
+.encoder-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Хедер страницы */
+.encoder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    flex: 1;
+}
+
+.encoder-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.encoder-icon {
+    font-size: 3rem;
+}
+
+.encoder-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.header-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.history-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.history-link:hover {
+    background: rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Основной контент */
+.encoder-content {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Боковая панель */
+.encoder-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.section-icon {
+    font-size: 1.3rem;
+}
+
+/* Алгоритмы */
+.algorithm-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.algorithm-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.algorithm-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.algorithm-card.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+}
+
+.algorithm-card.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.algorithm-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.algorithm-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.algorithm-desc {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.selection-indicator {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.algorithm-card.selected .selection-indicator {
+    background: #667eea;
+    border-color: #667eea;
+}
+
+.algorithm-card.selected .selection-indicator::after {
+    content: '✓';
+    color: white;
+    font-size: 0.8rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Инструменты */
+.tools-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.tool-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.tool-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: #f8f9fa;
+    border: 2px dashed #ddd;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #2c3e50;
+}
+
+.tool-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-style: solid;
+    transform: translateY(-2px);
+}
+
+.tool-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.tool-icon {
+    font-size: 1.2rem;
+}
+
+/* Информация об алгоритме */
+.algorithm-info-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.info-content {
+    text-align: center;
+}
+
+.current-algorithm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.algo-icon {
+    font-size: 2.5rem;
+}
+
+.algo-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.algo-description {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.algo-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.algo-stats .stat {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.algo-stats .stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.algo-stats .stat-label {
+    font-size: 0.8rem;
+}
+
+/* Рабочая область */
+.encoder-workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.input-section, .output-section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #eee;
+}
+
+.section-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.action-btn:hover:not(:disabled) {
+    background: #667eea;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.action-icon {
+    font-size: 1rem;
+}
+
+.text-area-container {
+    position: relative;
+}
+
+.text-area {
+    width: 100%;
+    padding: 1.5rem;
+    border: none;
+    resize: vertical;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    outline: none;
+}
+
+.input-area {
+    background: #fafafa;
+    min-height: 200px;
+}
+
+.output-area {
+    background: #f8f9ff;
+    min-height: 200px;
+}
+
+.text-counter {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    font-size: 0.8rem;
+    color: #666;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Кнопка кодирования */
+.encode-action {
+    display: flex;
+    justify-content: center;
+}
+
+.encode-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1.25rem 3rem;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.encode-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+}
+
+.encode-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.encode-btn.loading {
+    pointer-events: none;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.encode-icon {
+    font-size: 1.3rem;
+}
+
+/* История операций */
+.history-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.history-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border-left: 4px solid #667eea;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.algo-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.history-time {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.history-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.history-item {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.item-label {
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 50px;
+    font-size: 0.9rem;
+}
+
+.item-text {
+    color: #666;
+    font-size: 0.9rem;
+    word-break: break-all;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .encoder-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .encoder-sidebar {
+        order: 2;
+    }
+    
+    .encoder-workspace {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .encoder-page {
+        padding: 1rem;
+    }
+    
+    .encoder-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .header-stats {
+        align-items: center;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .history-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .encoder-title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .algorithm-card {
+        padding: 1rem;
+    }
+    
+    .encode-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .text-area {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+}

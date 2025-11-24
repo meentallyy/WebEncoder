@@ -1,0 +1,226 @@
+/* Основные переменные цветов */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --accent-color: #8e44ad;
+    --text-dark: #2c3e50;
+    --text-light: #ecf0f1;
+    --background: #f8f9fa;
+    --card-bg: #ffffff;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 80px;
+    padding: 0 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    background: var(--card-bg);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-gradient);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.nav-link:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.nav-link:hover::before {
+    left: 0;
+}
+
+.nav-link-active {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.nav-link-active::before {
+    display: none;
+}
+
+.nav-icon {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover .nav-icon {
+    transform: scale(1.2);
+}
+
+.nav-spacer {
+    width: 60px;
+    visibility: hidden;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.profile-link:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-hover);
+}
+
+.profile-tooltip {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-dark);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.profile-link:hover .profile-tooltip {
+    opacity: 1;
+    visibility: visible;
+    bottom: -35px;
+}
+
+/* Анимации */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-nav {
+    animation: fadeInDown 0.5s ease-out;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .header-nav {
+        padding: 0 1rem;
+        height: 70px;
+    }
+    
+    .nav-links {
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .nav-icon {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+        border-radius: 20px;
+        padding: 1rem;
+    }
+    
+    .nav-link {
+        justify-content: center;
+    }
+    
+    .nav-center {
+        position: static;
+        transform: none;
+        margin: 0 auto;
+    }
+    
+    .header-nav {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+    }
+    
+    .nav-spacer {
+        display: none;
+    }
+}
