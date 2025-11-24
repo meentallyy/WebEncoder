@@ -35,7 +35,7 @@ jobs:
           printf "$operation\n$shift\n" | java -cp src Caesar
           expected="Whvw Fdhvdu flskhu."
           result=$(cat output.txt)
-          echo "Original message: $expected"
+          echo "Original message: $original"
           echo "Operation: $operation"
           echo "Shift:     $shift"
           echo "Expected message: $expected"
