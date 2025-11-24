@@ -19,5 +19,10 @@ jobs:
           java-version: 17
           distribution: 'temurin'
 
+      - name: Создание директории out
+        run: mkdir -p backend/out
+
       - name: Компиляция
-        run: javac -d out $(find src -name "*.java")
+        run: |
+          find backend/src -name "*.java"
+          javac -d backend/out $(find backend/src -name "*.java")
