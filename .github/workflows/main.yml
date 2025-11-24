@@ -117,3 +117,25 @@ jobs:
             exit 1
           fi
           echo "Test 4 passed!"
+
+  build-RSA:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend/RSA
+
+    steps:
+      - name: Получение кода
+        uses: actions/checkout@v4
+
+      - name: Установка JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Компиляция RSA (KeyGenerator + RSA32768)
+        run: |
+          javac src/KeyGenerator.java
+          javac src/RSA32768.java
