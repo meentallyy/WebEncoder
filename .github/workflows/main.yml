@@ -28,9 +28,9 @@ jobs:
 
       - name: Тест 1 - Шифрование английского текста
         run: |
-          original = "Test Caesar cipher."
-          operation = 1
-          shift = 3
+          original="Test Caesar cipher."
+          operation=1
+          shift=3
           echo "$original" > input.txt
           printf "$operation\n$shift\n" | java -cp src Caesar
           expected = "Whvw Fdhvdu flskhu."
