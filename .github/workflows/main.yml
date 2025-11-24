@@ -28,12 +28,18 @@ jobs:
 
       - name: Тест 1 - Шифрование английского текста
         run: |
-          echo "Test Caesar cipher." > input.txt
-          printf "1\n3\n" | java -cp src Caesar
+          original = Test Caesar cipher."
+          operation = 1
+          shift = 3
+          echo "$original" > input.txt
+          printf "$operation\n$shift\n" | java -cp src Caesar
           expected="Whvw Fdhvdu flskhu."
           result=$(cat output.txt)
-          echo "EXPECTED: $expected"
-          echo "RESULT:   $result"
+          echo "Original message: $expected"
+          echo "Operation: $operation"
+          echo "Shift:     $shift"
+          echo "Expected message: $expected"
+          echo "Result:           $result"
           if [ "$expected" != "$result" ]; then
             echo "Test 1 failed!"
             exit 1
