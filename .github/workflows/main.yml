@@ -1,6 +1,7 @@
-name: Java CI
+name: WebEncoder CI
 
 on:
+  workflow_dispatch:
   push:
   pull_request:
 
