@@ -6,8 +6,12 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-caesar:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend/Caesar
 
     steps:
       - name: Получение кода из репозитория
@@ -16,13 +20,17 @@ jobs:
       - name: Установка JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 17
+          java-version: '21'
           distribution: 'temurin'
 
-      - name: Создание директории out
-        run: mkdir -p backend/out
-
       - name: Компиляция
+        run: javac src/Caesar.java
+
+      - name: Запуск
         run: |
-          find backend/src -name "*.java"
-          javac -d backend/out $(find backend/src -name "*.java")
+          printf "1\n3\n" | java -cp src Caesar # Автоматически подаём данные в программу: шифрование - 1, сдвиг - 3
+
+      - name: Чтение output.txt
+        run: |
+          echo "===== output.txt ====="
+          cat output.txt
