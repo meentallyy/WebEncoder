@@ -140,6 +140,60 @@ jobs:
           javac src/KeyGenerator.java
           javac src/RSA32768.java
 
+  test-rsa:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend/RSA
+
+    steps:
+      - name: Получение кода
+        uses: actions/checkout@v4
+
+      - name: Установка JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Компиляция RSA
+        run: |
+          javac src/RSA32768.java || true
+          # компилируем также KeyGenerator (не запускаем) — на всякий случай
+          javac src/KeyGenerator.java || true
+
+      - name: Тест RSA
+        run: |
+          output=$(java -Dfile.encoding=UTF-8 -cp src RSA32768 2>&1)
+          echo "=== RSA program output ==="
+          echo "$output"
+          echo "=== end output ==="
+
+          orig=$(echo "$output" | grep -E "Оригинальное сообщение:" | sed -E 's/.*: *//')
+          decrypted=$(echo "$output" | grep -E "Расшифрованное:" | sed -E 's/.*: *//')
+
+          if [ -z "$orig" ]; then
+            echo "Не удалось найти строку с 'Оригинальное сообщение:' в выводе."
+            exit 1
+          fi
+
+          if [ -z "$decrypted" ]; then
+            echo "Не удалось найти строку с 'Расшифрованное:' в выводе."
+            exit 1
+          fi
+
+          echo "Original:  $orig"
+          echo "Decrypted: $decrypted"
+
+          if [ "$orig" != "$decrypted" ]; then
+            echo "RSA test failed: расшифрованное значение не совпадает с оригиналом."
+            exit 1
+          fi
+
+          echo "RSA test passed!"
+
+
   build-kuznechik:
     runs-on: ubuntu-latest
 
