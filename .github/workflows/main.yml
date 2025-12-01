@@ -214,3 +214,30 @@ jobs:
       - name: Компиляция
         run: |
           javac src/Kuznechik.java
+
+      - name: Компиляция
+        run: |
+          javac src/Kuznechik.java
+
+      - name: Тест Kuznechik
+        run: |
+          java -cp src Kuznechik > kuz_out.txt 2>&1 || { echo "Kuznechik execution failed"; cat kuz_out.txt; exit 1; }
+          expected="8899AABBCCDDEEFF0077665544332211"
+          encrypted=$(sed -n '1p' kuz_out.txt | tr -d '\r\n')
+          decrypted=$(sed -n '2p' kuz_out.txt | tr -d '\r\n')
+
+          echo "Encrypted: $encrypted"
+          echo "Decrypted: $decrypted"
+          echo "Expected : $expected"
+
+          if [ "$decrypted" != "$expected" ]; then
+            echo "Тест FAILED: расшифровка не вернула исходный блок."
+            exit 1
+          fi
+
+          if [ "$encrypted" = "$expected" ]; then
+            echo "Тест FAILED: зашифрованный блок совпадает с исходным (ожидалось изменение)."
+            exit 1
+          fi
+
+          echo "Kuznechik test passed!"
