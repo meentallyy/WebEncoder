@@ -194,7 +194,7 @@ jobs:
           echo "RSA test passed!"
 
 
-  build-kuznechik:
+  test-kuznechik:
     runs-on: ubuntu-latest
 
     defaults:
