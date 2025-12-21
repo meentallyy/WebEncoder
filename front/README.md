@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# Установите зависимости
+npm install crypto-browserify stream-browserify assert buffer util process
+
+# Если используете CRACO
+npm install @craco/craco --save-dev
+
+# Перезапустите проект
+npm start

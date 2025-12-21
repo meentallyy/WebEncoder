@@ -2,19 +2,6 @@
   "name": "my-react-app",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@reduxjs/toolkit": "^2.9.0",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.8.0",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-redux": "^9.2.0",
-    "react-router-dom": "^7.9.2",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -39,7 +26,29 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.9.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "assert": "^2.1.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
+    "jsencrypt": "^3.3.2",
+    "process": "^0.11.10",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.9.2",
+    "react-scripts": "5.0.1",
+    "stream-browserify": "^3.0.0",
+    "util": "^0.12.5",
+    "web-vitals": "^2.1.4"
+  },
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "@types/crypto-js": "^4.2.1",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@types/react-router-dom": "^5.3.3"
