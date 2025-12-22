@@ -9,12 +9,31 @@ export interface EncoderState {
   isProcessing: boolean;
   error: string | null;
   historyRequest: HistoryItem[];
+  rsaKeys: {
+        publicKey: string;
+        privateKey: string;
+    } | null;
+    kuznechikKey: string | null;
+    stribogBitLength: 256 | 512;
+
 }
 
 export interface FilterState {
   selectedCategory: typeof CATEGORIES[number];//string;
   selectedTimeRange: typeof TIME_RANGES[number];
   selectedAlgorithm: typeof ALGORITHMS[number];//Algorithm;
+}
+
+export interface User {
+  name:string;
+  email:string;
+  phone:string;
+  dateRegistration:string;
+  hasPro:boolean;
+}
+
+export interface ProfileState {
+  user:User;
 }
 
 export interface Category {

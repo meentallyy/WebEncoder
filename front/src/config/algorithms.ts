@@ -1,46 +1,40 @@
 import {Algorithm} from "../store/types.ts"
 
-export const ALGORITHMS: Algorithm[] = [
-  { 
-    value: 'base64', 
-    label: 'Base64', 
-    icon: '📝', 
-    description: 'Кодирование в текстовый формат', 
-  },
-  { 
-    value: 'RSA', 
-    label: 'RSA', 
-    icon: '📨', 
-    description: 'Шифрование RSA', 
-  },
-  { 
-    value: 'Kuznechic', 
-    label: 'Kuznechic', 
-    icon: '🦗', 
-    description: 'Шифрование kuznechic', 
-  },
-  { 
-    value: 'Stribog', 
-    label: 'Stribog', 
-    icon: '🔒', 
-    description: 'Шифрование stribog', 
-  },
-  { 
-    value: 'hex', 
-    label: 'Hexadecimal', 
-    icon: '🔡', 
-    description: 'Шестнадцатеричное кодирование', 
-  },
-  { 
-    value: 'binary', 
-    label: 'Binary', 
-    icon: '💻', 
-    description: 'Двоичное представление', 
-  },
-  { 
-    value: 'rot13', 
-    label: 'ROT13', 
-    icon: '🔄', 
-    description: 'Шифр Цезаря', 
-  }
+export const ALGORITHMS = [
+    {
+        value: 'Stribog',
+        label: 'Стрибог',
+        description: 'Российский алгоритм хеширования (GOST R 34.11-2012)',
+        icon: '🔐'
+    },
+    {
+        value: 'RSA',
+        label: 'RSA',
+        description: 'Асимметричное шифрование с открытым ключом',
+        icon: '🔑'
+    },
+    {
+        value: 'Kuznechik',
+        label: 'Кузнечик',
+        description: 'Российский симметричный блочный шифр (ГОСТ Р 34.12-2015)',
+        icon: '🦗'
+    },
+    {
+        value: 'Base64',
+        label: 'Base64',
+        description: 'Кодирование в base64',
+        icon: '📄'
+    },
+    {
+        value: 'URL',
+        label: 'URL',
+        description: 'URL кодирование',
+        icon: '🌐'
+    },
+    {
+        value: 'Caesar',
+        label: 'Шифр Цезаря',
+        description: 'Простой шифр замены',
+        icon: '🏛️'
+    }
 ];
