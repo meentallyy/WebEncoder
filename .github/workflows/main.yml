@@ -205,3 +205,39 @@ jobs:
 
           javac -cp target/classes KuzTest.java
           java  -cp target/classes:. KuzTest
+
+
+      - name: Тест StribogHash
+        run: |
+          cat << 'EOF' > StribogTest.java
+          import com.example.backend.crypto.StribogHash;
+
+          public class StribogTest {
+              public static void main(String[] args) {
+
+                  // Тест 1 – hash пустой строки
+                  String h1 = StribogHash.hash("");
+                  String expected1 = "8E945DA20937A9BD75389B1A5F3260A4C9F73F0AF6C5CBA5D0F5C2CED0F2B4D4FC9D7CBE4A3C6C7F3B3F1E90CE98557F8BAF0EEDE6DCC43C7956BB13EEADC81B";
+                  if (!h1.equalsIgnoreCase(expected1)) {
+                      throw new RuntimeException("Stribog test 1 failed");
+                  }
+
+                  // Тест 2 – hash "abc"
+                  String h2 = StribogHash.hash("abc");
+                  String expected2 = "BA0F63AF1F8FD5D612127E8D3CCE3DC32A3F37CC06E189F8A18C4E168024942D5DE9E52EAEF07A59B38CEA8B073A879C2F9B23D39F1B45C5DB23E90B4EAC8A42";
+                  if (!h2.equalsIgnoreCase(expected2)) {
+                      throw new RuntimeException("Stribog test 2 failed");
+                  }
+
+                  // Форма результата HEX?
+                  if (!h1.matches("[0-9A-Fa-f]+") || !h2.matches("[0-9A-Fa-f]+")) {
+                      throw new RuntimeException("Stribog hash not in HEX format");
+                  }
+
+                  System.out.println("Stribog tests passed");
+              }
+          }
+          EOF
+
+          javac -cp target/classes StribogTest.java
+          java  -cp target/classes:. StribogTest
