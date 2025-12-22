@@ -1,19 +1,200 @@
-name: WebEncoder CI
+name: Backend Crypto CI
 
 on:
-  workflow_dispatch:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
+  # Сборка
+  build-backend:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Maven-компиляция
+        run: mvn -q clean compile
+
+  # Тесты CaesarCipher
   test-caesar:
     runs-on: ubuntu-latest
+    needs: build-backend
 
-  build-RSA:
-    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
 
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - run: mvn -q compile
+
+      - name: Тестирование CaesarCipher
+        run: |
+          cat << 'EOF' > CaesarTest.java
+          import com.example.backend.crypto.CaesarCipher;
+
+          public class CaesarTest {
+              public static void main(String[] args) {
+
+                  // 1. Шифрование английского текста
+                  String enOriginal = "Test Caesar cipher.";
+                  String enEncrypted = CaesarCipher.encrypt(enOriginal, 3);
+                  String enExpected = "Whvw Fdhvdu flskhu.";
+                  if (!enEncrypted.equals(enExpected)) {
+                      throw new RuntimeException("Ошибка шифрования EN");
+                  }
+
+                  // 2. Дешифрование английского текста
+                  if (!CaesarCipher.decrypt(enEncrypted, 3).equals(enOriginal)) {
+                      throw new RuntimeException("Ошибка дешифрования EN");
+                  }
+
+                  // 3. Шифрование русского текста
+                  String ruOriginal = "Тест шифра Цезаря.";
+                  String ruEncrypted = CaesarCipher.encrypt(ruOriginal, 5);
+                  String ruExpected = "Чйцч энщхе Ыймехд.";
+                  if (!ruEncrypted.equals(ruExpected)) {
+                      throw new RuntimeException("Ошибка шифрования RU");
+                  }
+
+                  // 4. Дешифрование русского текста
+                  if (!CaesarCipher.decrypt(ruEncrypted, 5).equals(ruOriginal)) {
+                      throw new RuntimeException("Ошибка дешифрования RU");
+                  }
+
+                  System.out.println("CaesarCipher: all tests passed");
+              }
+          }
+          EOF
+
+          javac -cp target/classes CaesarTest.java
+          java  -cp target/classes:. CaesarTest
+
+  # Тесты RSACipher
   test-rsa:
     runs-on: ubuntu-latest
+    needs: build-backend
 
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - run: mvn -q compile
+
+      - name: Тестирование RSACipher
+        run: |
+          cat << 'EOF' > RSATest.java
+          import com.example.backend.crypto.RSACipher;
+
+          public class RSATest {
+              public static void main(String[] args) throws Exception {
+
+                  String[] messages = {
+                      "Hello",
+                      "Привет",
+                      "1234567890",
+                      "!@#$%^&*()",
+                      "",
+                      "Сообщение с Юникодом ץ",
+                  };
+
+                  for (String msg : messages) {
+                      String decrypted = RSACipher.encryption(msg);
+                      if (!msg.equals(decrypted)) {
+                          throw new RuntimeException("Ошибка RSA для сообщения: [" + msg + "]");
+                      }
+                  }
+
+                  System.out.println("RSACipher: all tests passed");
+              }
+          }
+          EOF
+
+          javac -cp target/classes RSATest.java
+          java  -cp target/classes:. RSATest
+
+  # Тесты KuznechikCipher
   test-kuznechik:
     runs-on: ubuntu-latest
+    needs: build-backend
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - run: mvn -q compile
+
+      - name: Тестирование KuznechikCipher
+        run: |
+          cat << 'EOF' > KuzTest.java
+          import com.example.backend.crypto.KuznechikCipher;
+
+          public class KuzTest {
+              public static void main(String[] args) {
+
+                  String input1 = "8899AABBCCDDEEFF0077665544332211";
+                  String input2 = "00112233445566778899AABBCCDDEEFF";
+
+                  String enc1 = KuznechikCipher.encrypt(input1);
+                  String enc1Repeat = KuznechikCipher.encrypt(input1);
+                  String enc2 = KuznechikCipher.encrypt(input2);
+
+                  // 1. Проверка детерминированности
+                  if (!enc1.equals(enc1Repeat)) {
+                      throw new RuntimeException("Кузнечик не детерминирован");
+                  }
+
+                  // 2. Шифртекст не должен совпадать с открытым текстом
+                  if (enc1.equalsIgnoreCase(input1)) {
+                      throw new RuntimeException("Шифрование не изменило данные");
+                  }
+
+                  // 3. Разные входные данные → разные выходные данные
+                  if (enc1.equals(enc2)) {
+                      throw new RuntimeException("Разные входы дали одинаковый результат");
+                  }
+
+                  // 4. Проверка HEX-формата результата
+                  if (!enc1.matches("[0-9A-Fa-f]+")) {
+                      throw new RuntimeException("Результат не является HEX-строкой");
+                  }
+
+                  System.out.println("KuznechikCipher: all tests passed");
+              }
+          }
+          EOF
+
+          javac -cp target/classes KuzTest.java
+          java  -cp target/classes:. KuzTest
